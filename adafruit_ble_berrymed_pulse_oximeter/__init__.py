@@ -64,23 +64,23 @@ PulseOximeterValues = namedtuple(
 )
 """Namedtuple for measurement values.
 
-.. py:data:: PulseOximeterValues.valid
+* `PulseOximeterValues.valid`
 
         ``True`` if sensor readings are not valid right now
 
-.. py:data:: PulseOximeterValues.finger_present
+* `PulseOximeterValues.finger_present`
 
         ``True`` if finger present.
 
-.. py:data:: PulseOximeterValues.spo2
+* `PulseOximeterValues.spo2`
 
         SpO2 value (int): 0-100%: blood oxygen saturation level.
 
-.. py:data:: PulseOximeterValues.pulse_rate
+* `PulseOximeterValues.pulse_rate`
 
         Pulse rate, in beats per minute (int).
 
-.. py:data:: PulseOximeterValues.pleth
+* `PulseOximeterValues.pleth`
 
         Plethysmograph value, 0-100 (int).
 
