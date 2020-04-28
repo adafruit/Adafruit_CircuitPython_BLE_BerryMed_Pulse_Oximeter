@@ -60,8 +60,7 @@ __repo__ = (
 
 
 PulseOximeterValues = namedtuple(
-    "PulseOximeterValues",
-    ("valid", "spo2", "pulse_rate", "pleth", "finger_present"),
+    "PulseOximeterValues", ("valid", "spo2", "pulse_rate", "pleth", "finger_present"),
 )
 """Namedtuple for measurement values.
 
