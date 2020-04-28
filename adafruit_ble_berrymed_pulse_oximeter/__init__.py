@@ -37,8 +37,8 @@ Implementation Notes
 
   Protocol defined here: https://github.com/zh2x/BCI_Protocol
   Thanks as well to:
-      https://github.com/ehborisov/BerryMed-Pulse-Oximeter-tool
-      https://github.com/ScheindorfHyenetics/berrymedBluetoothOxymeter
+  * https://github.com/ehborisov/BerryMed-Pulse-Oximeter-tool
+  * https://github.com/ScheindorfHyenetics/berrymedBluetoothOxymeter
 
 **Software and Dependencies:**
 
@@ -64,23 +64,23 @@ PulseOximeterValues = namedtuple(
 )
 """Namedtuple for measurement values.
 
-.. py:attribute:: PulseOximeterValues.valid
+.. py:data:: PulseOximeterValues.valid
 
-        ``True` if sensor readings are not valid right now
+        ``True`` if sensor readings are not valid right now
 
-.. py:attribute:: PulseOximeterValues.finger_present
+.. py:data:: PulseOximeterValues.finger_present
 
         ``True`` if finger present.
 
-.. py:attribute:: PulseOximeterValues.spo2
+.. py:data:: PulseOximeterValues.spo2
 
         SpO2 value (int): 0-100%: blood oxygen saturation level.
 
-.. py:attribute:: PulseOximeterValues.pulse_rate
+.. py:data:: PulseOximeterValues.pulse_rate
 
         Pulse rate, in beats per minute (int).
 
-.. py:attribute:: PulseOximeterValues.pleth
+.. py:data:: PulseOximeterValues.pleth
 
         Plethysmograph value, 0-100 (int).
 
