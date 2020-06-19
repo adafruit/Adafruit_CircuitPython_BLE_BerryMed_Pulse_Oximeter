@@ -18,7 +18,7 @@ with open(path.join(here, "README.rst"), encoding="utf-8") as f:
     long_description = f.read()
 
 setup(
-    name="adafruit-circuitpython-ble-pulse-oximeter",
+    name="adafruit-circuitpython-ble-berrymed-pulse-oximeter",
     use_scm_version=True,
     setup_requires=["setuptools_scm"],
     description="BLE Support for BerryMed Pulse Oximeter Service",
@@ -44,10 +44,10 @@ setup(
         "Programming Language :: Python :: 3.5",
     ],
     # What does your project relate to?
-    keywords="adafruit blinka circuitpython micropython ble_contec_pulse_oximeter ble pulse oximeter berrymed spo2",
+    keywords="adafruit blinka circuitpython micropython ble_berrymed_pulse_oximeter ble pulse oximeter berrymed spo2",
     # You can just specify the packages manually here if your project is
     # simple. Or you can use find_packages().
     # TODO: IF LIBRARY FILES ARE A PACKAGE FOLDER,
     #       CHANGE `py_modules=['...']` TO `packages=['...']`
-    py_modules=["adafruit_ble_contec_pulse_oximeter"],
+    py_modules=["adafruit_ble_berrymed_pulse_oximeter"],
 )
