@@ -21,8 +21,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 """
-`nordic`
-====================================================
+`adafruit_ble_berrymed_pulse_oximeter.adafruit_ble_transparent_uart`
+=============================================================================
 
 This module provides Services used by MicroChip
 
