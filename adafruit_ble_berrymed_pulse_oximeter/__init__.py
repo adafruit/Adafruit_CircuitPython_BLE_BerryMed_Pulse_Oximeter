@@ -33,12 +33,19 @@ Implementation Notes
 
 **Hardware:**
 
-* BM1000C, made by Shanghai Berry Electronic Tech Co.,Ltd
+* BM1000, made by Shanghai Berry Electronic Tech Co.,Ltd.
+  Device labeling is not consistent.
+  May be identified on device label, box, or in BLE advertisement as
+  BM1000, BM1000B, BM1000C, or BM1000E.
 
-  Protocol defined here: https://github.com/zh2x/BCI_Protocol
+  Protocol defined here:
+
+    * https://github.com/zh2x/BCI_Protocol.
+
   Thanks as well to:
-  * https://github.com/ehborisov/BerryMed-Pulse-Oximeter-tool
-  * https://github.com/ScheindorfHyenetics/berrymedBluetoothOxymeter
+
+    * https://github.com/ehborisov/BerryMed-Pulse-Oximeter-tool
+    * https://github.com/ScheindorfHyenetics/berrymedBluetoothOxymeter
 
 **Software and Dependencies:**
 
@@ -100,14 +107,23 @@ class BerryMedPulseOximeterService(TransparentUARTService):
 
         Return ``None`` if no data available.
         """
-        first_byte = self.read(1)
-        # Wait for a byte with the high bit set, which indicates the beginning
-        # a data packet.
-        if not first_byte:
-            return None
-        header = first_byte[0]
-        if header & 0x80 == 0:
-            # Not synchronized.
+        # Discard stale data.
+        self.reset_input_buffer()
+        # Data packets are five bytes long. The first byte has its high bit set;
+        # the rest do not. Read up to five bytes to get back in sync.
+        have_header = False
+        for _ in range(5):
+            first_byte = self.read(1)
+            if not first_byte:
+                # Nothing read, even after stream timeout.
+                return None
+            header = first_byte[0]
+            if header & 0x80:
+                have_header = True
+                break
+
+        if not have_header:
+            # Failed to synchronize.
             return None
 
         data = self.read(4)
