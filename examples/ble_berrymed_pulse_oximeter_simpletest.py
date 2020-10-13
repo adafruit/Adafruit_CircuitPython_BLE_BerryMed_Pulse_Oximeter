@@ -16,6 +16,12 @@ from adafruit_ble.advertising.standard import Advertisement
 from adafruit_ble.services.standard.device_info import DeviceInfoService
 from adafruit_ble_berrymed_pulse_oximeter import BerryMedPulseOximeterService
 
+# CircuitPython <6 uses its own ConnectionError type. So, is it if available. Otherwise,
+# the built in ConnectionError is used.
+connection_error = ConnectionError
+if hasattr(_bleio, "ConnectionError"):
+    connection_error = _bleio.ConnectionError
+
 # PyLint can't find BLERadio for some reason so special case it here.
 ble = adafruit_ble.BLERadio()  # pylint: disable=no-member
 
@@ -56,9 +62,9 @@ while True:
             pulse_ox_service = pulse_ox_connection[BerryMedPulseOximeterService]
             while pulse_ox_connection.connected:
                 print(pulse_ox_service.values)
-    except _bleio.ConnectionError:  # pylint: disable=no-member
+    except connection_error:
         try:
             pulse_ox_connection.disconnect()
-        except _bleio.ConnectionError:  # pylint: disable=no-member
+        except connection_error:
             pass
         pulse_ox_connection = None
