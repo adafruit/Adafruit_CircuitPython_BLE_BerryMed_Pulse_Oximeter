@@ -54,6 +54,11 @@ To install in a virtual environment in your current project:
     source .env/bin/activate
     pip3 install adafruit-circuitpython-ble-berrymed-pulse-oximeter
 
+Documentation
+=============
+
+API documentation for this library can be found on `Read the Docs <https://circuitpython.readthedocs.io/projects/ble_berrymed_pulse_oximeter/en/latest/>`_.
+
 Contributing
 ============
 
