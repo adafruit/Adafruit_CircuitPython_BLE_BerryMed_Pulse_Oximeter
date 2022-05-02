@@ -15,6 +15,12 @@ from adafruit_ble import Service
 from adafruit_ble.uuid import VendorUUID
 from adafruit_ble.characteristics.stream import StreamOut, StreamIn
 
+try:
+    from typing import Optional
+except ImportError:
+    pass
+from circuitpython_typing import ReadableBuffer, WriteableBuffer
+
 __version__ = "0.0.0-auto.0"
 __repo__ = (
     "https://github.com/adafruit/Adafruit_CircuitPython_BLE_Contec_Pulse_Oximeter.git"
@@ -44,7 +50,7 @@ class TransparentUARTService(Service):
         buffer_size=64,
     )
 
-    def __init__(self, service=None):
+    def __init__(self, service: Optional["TransparentUARTService"] = None):
         super().__init__(service=service)
         self.connectable = True
         if not service:
@@ -55,7 +61,7 @@ class TransparentUARTService(Service):
             self._tx = self._server_rx
             self._rx = self._server_tx
 
-    def read(self, nbytes=None):
+    def read(self, nbytes: Optional[int] = None) -> Optional[bytes]:
         """
         Read characters. If ``nbytes`` is specified then read at most that many bytes.
         Otherwise, read everything that arrives until the connection times out.
@@ -66,7 +72,9 @@ class TransparentUARTService(Service):
         """
         return self._rx.read(nbytes)
 
-    def readinto(self, buf, nbytes=None):
+    def readinto(
+        self, buf: WriteableBuffer, nbytes: Optional[int] = None
+    ) -> Optional[int]:
         """
         Read bytes into the ``buf``. If ``nbytes`` is specified then read at most
         that many bytes. Otherwise, read at most ``len(buf)`` bytes.
@@ -76,7 +84,7 @@ class TransparentUARTService(Service):
         """
         return self._rx.readinto(buf, nbytes)
 
-    def readline(self):
+    def readline(self) -> Optional[bytes]:
         """
         Read a line, ending in a newline character.
 
@@ -86,14 +94,14 @@ class TransparentUARTService(Service):
         return self._rx.readline()
 
     @property
-    def in_waiting(self):
+    def in_waiting(self) -> int:
         """The number of bytes in the input buffer, available to be read."""
         return self._rx.in_waiting
 
-    def reset_input_buffer(self):
+    def reset_input_buffer(self) -> None:
         """Discard any unread characters in the input buffer."""
         self._rx.reset_input_buffer()
 
-    def write(self, buf):
+    def write(self, buf: ReadableBuffer) -> None:
         """Write a buffer of bytes."""
         self._tx.write(buf)
