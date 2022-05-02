@@ -19,7 +19,7 @@ try:
     from typing import Optional
 except ImportError:
     pass
-from circuitpython_typing import ReadableBuffer
+from circuitpython_typing import ReadableBuffer, WriteableBuffer
 
 __version__ = "0.0.0-auto.0"
 __repo__ = (
@@ -50,7 +50,7 @@ class TransparentUARTService(Service):
         buffer_size=64,
     )
 
-    def __init__(self, service: Optional[Service] = None):
+    def __init__(self, service: Optional["TransparentUARTService"] = None):
         super().__init__(service=service)
         self.connectable = True
         if not service:
@@ -61,7 +61,7 @@ class TransparentUARTService(Service):
             self._tx = self._server_rx
             self._rx = self._server_tx
 
-    def read(self, nbytes: Optional[bytes] = None) -> Optional[bytes]:
+    def read(self, nbytes: Optional[int] = None) -> Optional[bytes]:
         """
         Read characters. If ``nbytes`` is specified then read at most that many bytes.
         Otherwise, read everything that arrives until the connection times out.
@@ -72,7 +72,9 @@ class TransparentUARTService(Service):
         """
         return self._rx.read(nbytes)
 
-    def readinto(self, buf: bytes, nbytes: Optional[bytes] = None) -> Optional[int]:
+    def readinto(
+        self, buf: WriteableBuffer, nbytes: Optional[int] = None
+    ) -> Optional[int]:
         """
         Read bytes into the ``buf``. If ``nbytes`` is specified then read at most
         that many bytes. Otherwise, read at most ``len(buf)`` bytes.
