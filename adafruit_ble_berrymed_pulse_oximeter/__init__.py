@@ -43,7 +43,7 @@ import struct
 
 from .adafruit_ble_transparent_uart import TransparentUARTService
 
-__version__ = "0.0.0-auto.0"
+__version__ = "0.0.0+auto.0"
 __repo__ = (
     "https://github.com/adafruit/Adafruit_CircuitPython_BLE_BerryMed_Pulse_Oximeter.git"
 )
