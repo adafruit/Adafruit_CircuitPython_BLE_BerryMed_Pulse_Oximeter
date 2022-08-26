@@ -17,9 +17,9 @@ from adafruit_ble.characteristics.stream import StreamOut, StreamIn
 
 try:
     from typing import Optional
+    from circuitpython_typing import ReadableBuffer, WriteableBuffer
 except ImportError:
     pass
-from circuitpython_typing import ReadableBuffer, WriteableBuffer
 
 __version__ = "0.0.0+auto.0"
 __repo__ = (
