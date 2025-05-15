@@ -38,15 +38,13 @@ Implementation Notes
 
 # imports
 
-from collections import namedtuple
 import struct
+from collections import namedtuple
 
 from .adafruit_ble_transparent_uart import TransparentUARTService
 
 __version__ = "0.0.0+auto.0"
-__repo__ = (
-    "https://github.com/adafruit/Adafruit_CircuitPython_BLE_BerryMed_Pulse_Oximeter.git"
-)
+__repo__ = "https://github.com/adafruit/Adafruit_CircuitPython_BLE_BerryMed_Pulse_Oximeter.git"
 
 
 PulseOximeterValues = namedtuple(

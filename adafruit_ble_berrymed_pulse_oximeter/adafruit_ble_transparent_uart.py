@@ -12,19 +12,18 @@ This module provides Services used by MicroChip
 """
 
 from adafruit_ble import Service
+from adafruit_ble.characteristics.stream import StreamIn, StreamOut
 from adafruit_ble.uuid import VendorUUID
-from adafruit_ble.characteristics.stream import StreamOut, StreamIn
 
 try:
     from typing import Optional
+
     from circuitpython_typing import ReadableBuffer, WriteableBuffer
 except ImportError:
     pass
 
 __version__ = "0.0.0+auto.0"
-__repo__ = (
-    "https://github.com/adafruit/Adafruit_CircuitPython_BLE_Contec_Pulse_Oximeter.git"
-)
+__repo__ = "https://github.com/adafruit/Adafruit_CircuitPython_BLE_Contec_Pulse_Oximeter.git"
 
 
 class TransparentUARTService(Service):
@@ -37,7 +36,6 @@ class TransparentUARTService(Service):
       If more bytes are received, older bytes will be discarded.
     """
 
-    # pylint: disable=no-member
     uuid = VendorUUID("49535343-FE7D-4AE5-8FA9-9FAFD205E455")
     _server_tx = StreamOut(
         uuid=VendorUUID("49535343-1E4D-4BD9-BA61-23C647249616"),
@@ -72,9 +70,7 @@ class TransparentUARTService(Service):
         """
         return self._rx.read(nbytes)
 
-    def readinto(
-        self, buf: WriteableBuffer, nbytes: Optional[int] = None
-    ) -> Optional[int]:
+    def readinto(self, buf: WriteableBuffer, nbytes: Optional[int] = None) -> Optional[int]:
         """
         Read bytes into the ``buf``. If ``nbytes`` is specified then read at most
         that many bytes. Otherwise, read at most ``len(buf)`` bytes.
